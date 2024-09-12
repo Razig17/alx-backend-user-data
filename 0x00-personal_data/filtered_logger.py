@@ -6,9 +6,9 @@ from typing import List
 
 
 def filter_datum(fields: List[str], redaction: str,
-                 message: str, seprarator: str) -> str:
+                 message: str, separator: str) -> str:
     """Obfuscate fileds inside a message"""
     for field in fields:
-        message = re.sub(rf"{field}=.+?{seprarator}",
-                         f"{field}={redaction}{seprarator}", message)
+        message = re.sub(rf"{field}=.+?{separator}",
+                         f"{field}={redaction}{separator}", message)
     return message
