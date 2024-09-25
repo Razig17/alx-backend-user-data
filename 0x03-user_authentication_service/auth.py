@@ -51,6 +51,14 @@ class Auth:
         self._db._session.commit()
         return session_id
 
+    def get_user_from_session_id(self, session_id) -> User:
+        """Finds a user by session ID"""
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+            return User
+        except NoResultFound:
+            return None
+
 
 def _generate_uuid() -> str:
     """Return a string representation of a new UUID"""
