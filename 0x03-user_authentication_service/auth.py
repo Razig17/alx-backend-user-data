@@ -63,7 +63,7 @@ class Auth:
         """Creates a session id"""
         try:
             user = self._db.find_user_by(id=user_id)
-            self._db.update_user(id, session_id=None)
+            self._db.update_user(user_id, session_id=None)
             return None
         except NoResultFound:
             return None
