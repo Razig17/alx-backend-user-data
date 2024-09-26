@@ -54,7 +54,7 @@ class Auth:
         """Finds a user by session ID"""
         try:
             user = self._db.find_user_by(session_id=session_id)
-            return User
+            return user
         except NoResultFound:
             return None
 
