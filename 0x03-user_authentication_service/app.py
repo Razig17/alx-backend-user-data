@@ -2,7 +2,6 @@
 """Flask app module"""
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
-from sqlalchemy.orm.exc import NoResultFound
 
 
 app = Flask(__name__)
@@ -46,12 +45,11 @@ def login():
 def logout():
     """Logout route"""
     session_id = request.cookies.get("session_id")
-    try:
-        user = AUTH.get_user_from_session_id(session_id)
-        AUTH.destroy_session(user.id)
-        return redirect("/")
-    except NoResultFound:
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is None:
         abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect("/")
 
 
 if __name__ == "__main__":
